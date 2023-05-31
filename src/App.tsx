@@ -1,26 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route, Link } from "react-router-dom"
+import { AboutMe } from './pages/AboutMe';
+import { NotFound } from './pages/NotFound';
+import { Posts } from './pages/Posts';
+import { User } from './pages/User';
+import { Layout } from './components/Layout';
+import './globals.sass'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<>
+			<Routes>
+				<Route path='/' element={<Layout />}>
+					<Route index element={<Posts />} />
+					<Route path='about' element={<AboutMe />} />
+					<Route path='user' element={<User />} />
+					<Route path='*' element={<NotFound />} />
+				</Route>
+			</Routes>
+		</>
+	);
 }
 
 export default App;
