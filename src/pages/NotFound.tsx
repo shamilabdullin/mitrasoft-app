@@ -1,7 +1,12 @@
 import React from 'react'
+import styles from './NotFound.module.sass'
 
-export const NotFound = () => {
+export const NotFound: React.FC = () => {
   return (
-	<div>NotFound</div>
+	<div className={styles.container}>
+		<div className={styles.title}>
+			<h1>Not Found</h1>
+		</div>
+	</div>
   )
 }
