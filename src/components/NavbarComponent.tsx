@@ -1,7 +1,7 @@
 import styles from './Navbar.module.sass'
 import React from 'react'
 import { Nav } from 'react-bootstrap'
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Container from 'react-bootstrap/Container';
@@ -13,18 +13,13 @@ export const NavbarComponent = () => {
 		<Nav className={styles.nav}>
 			<Nav.Link>
 				<Button variant='light'>
-					<Link to="/">Posts</Link>
+					<NavLink to="/">Posts</NavLink>
 				</Button>
 			</Nav.Link>
 			<Nav.Link>
-			<Button variant='light'>
-				<Link to="/user">User</Link>
-			</Button>
-			</Nav.Link>
-			<Nav.Link>
-			<Button variant='light'>
-				<Link to="/about">About me</Link>
-			</Button>
+				<Button variant='light'>
+					<NavLink to="/about">About me</NavLink>
+				</Button>
 			</Nav.Link>
 		</Nav>
 	</Navbar>

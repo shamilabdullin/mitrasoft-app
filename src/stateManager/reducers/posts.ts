@@ -1,5 +1,5 @@
 import { PostAction, PostState } from "../../types/post"
-import { SET_POSTS } from "../constants"
+import { GET_POSTS, SET_POSTS } from "../constants"
 import { Post } from "../../types/post"
 
 const initialState: PostState = {
@@ -13,6 +13,7 @@ export const postReducer = (state = initialState, action: PostAction): PostState
 				...state,
 				posts: action.payload
 			}
+
 		default:
 			return state
 	}

@@ -10,6 +10,6 @@ export interface PostState {
 }
 
 export interface PostAction {
-	type: "SET_POSTS";
+	type: "SET_POSTS" | "GET_POSTS";
 	payload: []
 }

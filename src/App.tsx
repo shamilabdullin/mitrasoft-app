@@ -15,7 +15,7 @@ function App() {
 				<Route path='/' element={<Layout />}>
 					<Route index element={<Posts />} />
 					<Route path='about' element={<AboutMe />} />
-					<Route path='user' element={<User />} />
+					<Route path='user/:id' element={<User />} />
 					<Route path='*' element={<NotFound />} />
 				</Route>
 			</Routes>
