@@ -6,10 +6,19 @@ export type Post = {
 }
 
 export interface PostState {
-	posts: Post[]
+	posts: Post[],
+	postsPage: number
 }
 
-export interface PostAction {
-	type: "SET_POSTS" | "GET_POSTS";
-	payload: []
+interface SetPostsAction {
+	type: "SET_POSTS";
+	payload: Post[];
 }
+interface SetPostsPageAction {
+	type: "SET_POSTS_PAGE";
+	payload: number
+}
+
+export type PostAction =
+	SetPostsAction | 
+	SetPostsPageAction

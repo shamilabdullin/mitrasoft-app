@@ -1,6 +1,6 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects'
 import { getPosts, getUser } from '../../api/index'
-import { GET_POSTS, GET_USER } from '../constants'
+import { GET_POSTS, GET_USER, SET_POSTS_PAGE } from '../constants'
 import { setPosts } from '../actions/actionCreator'
 import { Post } from '../../types/post'
 
@@ -10,16 +10,17 @@ export function* handlePosts(): Generator {
 	yield put(setPosts(posts))
 } 
 
-export function* handleUser(): Generator {
-	const user = yield getUser('1')
-}
+// export function* handleUser(): Generator {
+// 	const user = yield getUser('1')
+// }
 
 export function* watchPostsSaga() {
 	yield takeEvery(GET_POSTS, handlePosts)
+	yield takeEvery(SET_POSTS_PAGE, handlePosts)
 }
 
 export function* watchUserSaga() {
-	yield takeEvery(GET_USER, handleUser)
+	// yield takeEvery(GET_USER, handleUser)
 }
 
 export default function* rootSaga() {
