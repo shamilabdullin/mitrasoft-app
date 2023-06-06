@@ -25,7 +25,7 @@ export const PostsList = ({ posts }: PostsListProps) => {
 							</Link>
 						</div>
 					</div>
-					<CommentsList />
+					<CommentsList postId={post.id} />
 				</div>
 			))}
 		</div>

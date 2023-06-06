@@ -14,6 +14,12 @@ export async function getUser(id: string) {
 	return await data 
 }
 
+export async function getComments(postId: string) {
+	const { data } = await axios.get<Comment[]>(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`)
+
+	return await data 
+}
+
 type GetPostResponse = {
 	data: Post[];
 }

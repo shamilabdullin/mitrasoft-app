@@ -1,7 +1,8 @@
 import { GetUserResponse } from "../../api";
+import { Comment } from "../../types/comments";
 import { Post } from "../../types/post";
 import { User } from "../../types/user";
-import { GET_POSTS, GET_USER, SET_POSTS, SET_POSTS_PAGE, SET_USER } from "../constants";
+import { GET_COMMENTS, GET_POSTS, GET_USER, SET_COMMENTS, SET_POSTS, SET_POSTS_PAGE, SET_USER } from "../constants";
 
 type GetPostResponse = {
 	data: Post[]
@@ -29,4 +30,14 @@ export const setUser = (payload: User) => ({
 export const getUser = (payload: string) => ({
 	type: GET_USER,
 	payload
+})
+
+export const actionGetComments = (commentId: number) => ({
+	type: GET_COMMENTS,
+	payload: commentId
+})
+
+export const setComments = (comments: Comment[]) => ({
+	type: SET_COMMENTS,
+	payload: comments
 })
