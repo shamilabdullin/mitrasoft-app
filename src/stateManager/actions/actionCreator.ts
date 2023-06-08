@@ -1,11 +1,15 @@
+import { Comment } from './../../types/comments';
 import { GetUserResponse } from "../../api";
-import { Comment } from "../../types/comments";
 import { Post } from "../../types/post";
 import { User } from "../../types/user";
-import { GET_COMMENTS, GET_POSTS, GET_USER, SET_COMMENTS, SET_POSTS, SET_POSTS_PAGE, SET_USER } from "../constants";
+import { GET_COMMENTS, GET_POSTS, GET_USER, SET_COMMENT, SET_POSTS, SET_POSTS_PAGE, SET_USER } from "../constants";
 
 type GetPostResponse = {
 	data: Post[]
+}
+
+type GetCommentResponse = {
+	data: Comment[]
 }
 
 export const setPosts = (payload: Promise <GetPostResponse>) => ({
@@ -32,12 +36,15 @@ export const getUser = (payload: string) => ({
 	payload
 })
 
-export const actionGetComments = (commentId: number) => ({
+export const actionGetComments = (postId: number) => ({
 	type: GET_COMMENTS,
-	payload: commentId
+	payload: postId
 })
 
-export const setComments = (comments: Comment[]) => ({
-	type: SET_COMMENTS,
-	payload: comments
+export const setComments = (comments: Comment[], postId: number) => ({
+	type: SET_COMMENT,
+	payload: {
+		comments,
+		postId
+	}
 })

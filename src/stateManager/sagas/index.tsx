@@ -1,8 +1,8 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects'
 import { getComments, getPosts, getUser } from '../../api/index'
 import { GET_COMMENTS, GET_POSTS, GET_USER, SET_POSTS_PAGE } from '../constants'
-import { setPosts, actionGetComments, setComments } from '../actions/actionCreator'
-import { Post } from '../../types/post'
+import { setPosts, actionGetComments, setPostsPage, setComments } from '../actions/actionCreator'
+import { Post, SetCommentsAction } from '../../types/post'
 import { Action } from 'redux'
 
 export function* handlePosts(): Generator {
@@ -15,15 +15,15 @@ export function* handlePosts(): Generator {
 // 	const user = yield getUser('1')
 // }
 
-interface Test {
+interface GetCommentsAction {
 	type: string;
 	payload: number;
 }
 
-export function* handleComments(action: Test): Generator {
+export function* handleComments(action: GetCommentsAction): Generator {  //Test
 	const comments = yield call(getComments, action.payload.toString())
 	//@ts-ignore
-	yield put(setComments(comments))
+	yield put(setComments(comments, action.payload))
 }
 
 export function* watchPostsSaga() {

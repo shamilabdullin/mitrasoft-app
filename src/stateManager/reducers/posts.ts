@@ -1,5 +1,5 @@
 import { PostAction, PostState } from "../../types/post"
-import { GET_POSTS, SET_POSTS, SET_POSTS_PAGE } from "../constants"
+import { GET_POSTS, SET_COMMENT, SET_POSTS, SET_POSTS_PAGE } from "../constants"
 
 const initialState: PostState = {
 	posts: [],
@@ -18,6 +18,21 @@ export const postReducer = (state = initialState, action: PostAction): PostState
 			return {
 				...state,
 				postsPage: action.payload
+			}
+
+		case SET_COMMENT:
+			const posts = state.posts.map((post) => {
+				if (post.id === action.payload.postId) {
+					return {
+						...post, 
+						comments: action.payload.comments
+					}
+				}
+				return post
+			})
+			return {
+				...state,
+				posts: posts
 			}
 
 		default:
