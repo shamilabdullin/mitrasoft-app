@@ -12,7 +12,7 @@ type GetCommentResponse = {
 	data: Comment[]
 }
 
-export const setPosts = (payload: Promise <GetPostResponse>) => ({
+export const setPosts = (payload: Promise <GetPostResponse> | Post[]) => ({
 	type: SET_POSTS,
 	payload
 })

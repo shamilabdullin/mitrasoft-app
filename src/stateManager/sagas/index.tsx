@@ -28,7 +28,6 @@ export function* handleComments(action: GetCommentsAction): Generator {  //Test
 
 export function* watchPostsSaga() {
 	yield takeEvery(GET_POSTS, handlePosts)
-	yield takeEvery(SET_POSTS_PAGE, handlePosts)
 }
 
 export function* watchCommentsSaga() {

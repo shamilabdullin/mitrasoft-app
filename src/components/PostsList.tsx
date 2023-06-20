@@ -10,6 +10,7 @@ interface PostsListProps {
 }
 
 export const PostsList = ({ posts }: PostsListProps) => {
+
   return (
 		<div className={styles.posts}>
 			{posts.map(post => (

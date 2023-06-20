@@ -23,16 +23,13 @@ export const CommentsList = ({ postId }: CommentsListProps) => {
 			dispatch(actionGetComments(postId))
 	}
 
-	console.log(posts)
-	console.log(postId)
-
 	return (
 		<Accordion>
 			<Accordion.Header onClick={() => handleComments(postId)}>
 				Comments
 			</Accordion.Header>
 			<Accordion.Body>
-				{posts[postId - 1].comments !== undefined ? posts[postId - 1].comments.map((comment) => (
+				{posts[posts.findIndex(post => post.id === postId)].comments !== undefined ? posts[posts.findIndex(post => post.id === postId)].comments.map((comment) => (
 					<Card key={comment.id} className={styles.comment}>
 						<Card.Title className={styles.comment_title}><strong>{comment.email}</strong></Card.Title>
 						<Card.Body>{comment.body}</Card.Body>

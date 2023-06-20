@@ -23,6 +23,7 @@ export const postReducer = (state = initialState, action: PostAction): PostState
 		case SET_COMMENT:
 			const posts = state.posts.map((post) => {
 				if (post.id === action.payload.postId) {
+					console.log(post.id)
 					return {
 						...post, 
 						comments: action.payload.comments
