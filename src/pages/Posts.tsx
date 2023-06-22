@@ -14,6 +14,7 @@ import { PostsList } from '../components/PostsList'
 import Dropdown from 'react-bootstrap/Dropdown'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Spinner from 'react-bootstrap/Spinner'
 
 export const Posts: React.FC = () => {
 
@@ -23,15 +24,24 @@ export const Posts: React.FC = () => {
 	const [isSortedByTitle, setIsSortedByTitle] = useState(true)
 	const [searchTitle, setSearchTitle] = useState('')
 	const [isSearchTitle, setIsSearchTitle] = useState(false)
+	const [isLoading, setIsLoading] = useState(false)
 
 	useEffect(() => {
 		if (post.posts.length < 1) {
-			dispatch({ type: GET_POSTS })
+			setIsLoading(true)
+			setTimeout(() => {
+				dispatch({ type: GET_POSTS })
+			}, 1000)
 		}
 		if (searchTitle.length > 0) {
 
 		}
 	}, [searchTitle])
+
+	useEffect(() => {
+		if (post.posts.length > 0)
+			setIsLoading(false)
+	}, [post.posts])
 
 	const handlePagination = (page: number) => {
 		dispatch(setPostsPage(page))
@@ -52,47 +62,54 @@ export const Posts: React.FC = () => {
 
   return (
 	<div className={styles.container}>
-		<div className={styles.title}>
-			<h1>Posts</h1>
-		</div>
-		<div className={styles.instruments}>
-			<Dropdown>
-				<Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
-					Sorting
-				</Dropdown.Toggle>
-			<Dropdown.Menu variant="dark">
-					<Dropdown.Item onClick={() => sort()} active={isSortedByTitle}>
-						Sort in order
-					</Dropdown.Item>
-					<Dropdown.Item onClick={() => sort()} active={!isSortedByTitle}>
-						Sort by title
-					</Dropdown.Item>
-				</Dropdown.Menu>
-			</Dropdown>
+		{isLoading ?
+			<Spinner animation="grow" className={styles.spinner}/> 
+			:
+			<div>
+				<div className={styles.title}>
+					<h1>Posts</h1>
+				</div>
+				<div className={styles.instruments}>
+					<Dropdown>
+						<Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
+							Sorting
+						</Dropdown.Toggle>
+					<Dropdown.Menu variant="dark">
+							<Dropdown.Item onClick={() => sort()} active={isSortedByTitle}>
+								Sort in order
+							</Dropdown.Item>
+							<Dropdown.Item onClick={() => sort()} active={!isSortedByTitle}>
+								Sort by title
+							</Dropdown.Item>
+						</Dropdown.Menu>
+					</Dropdown>
 
-			<Form className="d-flex">
-				<Form.Control
-					type="search"
-					placeholder="Title"
-					className="me-2"
-					aria-label="Search"
-					onChange={(e) => setSearchTitle(e.currentTarget.value)}
-				/>
-          </Form>
-		</div>
-		<div className={styles.posts}>
-			{searchTitle ? 
-				<PostsList posts={post.posts.filter((post) => post.title.includes(searchTitle)).slice(post.postsPage * 10 - 10, post.postsPage * 10)} /> :
-				<PostsList posts={post.posts.slice(post.postsPage * 10 - 10, post.postsPage * 10)} />
-			}
-		</div>
-		<Pagination className={styles.pagination}>
-			{pages.map((page) => (
-				<Pagination.Item key={page.toString()} active={page === post.postsPage} onClick={() => handlePagination(page)}>
-					{page}
-				</Pagination.Item>
-			))}
-		</Pagination>
+					<Form className="d-flex">
+						<Form.Control
+							type="search"
+							placeholder="Title"
+							className="me-2"
+							aria-label="Search"
+							onChange={(e) => setSearchTitle(e.currentTarget.value)}
+						/>
+				</Form>
+				</div>
+				<div className={styles.posts}>
+					{searchTitle ? 
+						<PostsList posts={post.posts.filter((post) => post.title.includes(searchTitle)).slice(post.postsPage * 10 - 10, post.postsPage * 10)} /> 
+						:
+						<PostsList posts={post.posts.slice(post.postsPage * 10 - 10, post.postsPage * 10)} />
+					}
+				</div>
+				<Pagination className={styles.pagination}>
+					{pages.map((page) => (
+						<Pagination.Item key={page.toString()} active={page === post.postsPage} onClick={() => handlePagination(page)}>
+							{page}
+						</Pagination.Item>
+					))}
+				</Pagination>		
+			</div>
+		}
 	</div>
   )
 }
