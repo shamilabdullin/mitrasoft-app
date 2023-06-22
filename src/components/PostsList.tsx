@@ -1,8 +1,7 @@
-import React from 'react'
 import styles from './PostsList.module.sass'
 import { Post } from '../types/post'
 import { Link } from 'react-router-dom'
-import Avatar from './avatar.svg'
+import Avatar from '../public/avatar.svg'
 import { CommentsList } from './CommentsList'
 
 interface PostsListProps {

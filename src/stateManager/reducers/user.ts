@@ -31,6 +31,7 @@ const initialState = {
 
 export const userReducer = (state = initialState, action: UserAction): UserState => {
 	switch (action.type) {
+		
 		case SET_USER:
 			return {
 				...state, 

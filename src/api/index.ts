@@ -19,11 +19,3 @@ export async function getComments(postId: string) {
 
 	return await data 
 }
-
-type GetPostResponse = {
-	data: Post[];
-}
-
-export type GetUserResponse = {
-	user: User;
-}

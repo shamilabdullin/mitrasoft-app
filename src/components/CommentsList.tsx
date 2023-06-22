@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styles from './CommentsList.module.sass'
 import Accordion from 'react-bootstrap/Accordion'
 import { useDispatch } from 'react-redux';
@@ -6,7 +6,6 @@ import { Dispatch } from 'redux';
 import { actionGetComments } from '../stateManager/actions/actionCreator';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import Card from 'react-bootstrap/Card'
-import Spinner from 'react-bootstrap/Spinner'
 
 interface CommentsListProps {
 	postId: number;
@@ -14,10 +13,9 @@ interface CommentsListProps {
 
 export const CommentsList = ({ postId }: CommentsListProps) => {
 
+	const [commentsOpen, setCommentsOpen] = useState(false)
 	const dispatch = useDispatch <Dispatch>()
 	const { posts } = useTypedSelector(store => store.post) 
-	const [commentsOpen, setCommentsOpen] = useState(false)
-	const [isLoading, setIsLoading] = useState(false)
 
 	const handleComments = (postId: number) => {
 		setCommentsOpen(prev => !prev)
@@ -37,7 +35,9 @@ export const CommentsList = ({ postId }: CommentsListProps) => {
 							<Card.Title className={styles.comment_title}><strong>{comment.email}</strong></Card.Title>
 							<Card.Body>{comment.body}</Card.Body>
 						</Card>
-					)) : <></>}
+					)) 
+					: 
+					<></>}
 				</Accordion.Body>
 		</Accordion>
 	)

@@ -1,5 +1,5 @@
 import { PostAction, PostState } from "../../types/post"
-import { GET_POSTS, SET_COMMENT, SET_POSTS, SET_POSTS_PAGE } from "../constants"
+import { SET_COMMENT, SET_POSTS, SET_POSTS_PAGE } from "../constants"
 
 const initialState: PostState = {
 	posts: [],
@@ -8,6 +8,7 @@ const initialState: PostState = {
 
 export const postReducer = (state = initialState, action: PostAction): PostState => {
 	switch (action.type) {
+		
 		case SET_POSTS:
 			return {
 				...state,

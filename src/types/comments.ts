@@ -15,4 +15,9 @@ interface SetCommentsAction {
 	payload: Comment[]
 }
 
+export interface GetCommentsAction {
+	type: string;
+	payload: number;
+}
+
 export type CommentAction = SetCommentsAction

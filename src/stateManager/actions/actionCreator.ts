@@ -1,16 +1,7 @@
 import { Comment } from './../../types/comments';
-import { GetUserResponse } from "../../api";
-import { Post } from "../../types/post";
+import { GetPostResponse, Post } from "../../types/post";
 import { User } from "../../types/user";
 import { GET_COMMENTS, GET_POSTS, GET_USER, SET_COMMENT, SET_POSTS, SET_POSTS_PAGE, SET_USER } from "../constants";
-
-type GetPostResponse = {
-	data: Post[]
-}
-
-type GetCommentResponse = {
-	data: Comment[]
-}
 
 export const setPosts = (payload: Promise <GetPostResponse> | Post[]) => ({
 	type: SET_POSTS,

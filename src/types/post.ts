@@ -1,4 +1,3 @@
-import { NoSubstitutionTemplateLiteral } from "typescript";
 import { Comment } from "./comments";
 
 export type Post = {
@@ -12,6 +11,10 @@ export type Post = {
 export interface PostState {
 	posts: Post[],
 	postsPage: number
+}
+
+export type GetPostResponse = {
+	data: Post[]
 }
 
 interface SetPostsAction {

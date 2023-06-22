@@ -1,5 +1,4 @@
-import React from 'react'
-import { Link, Outlet } from "react-router-dom"
+import { Outlet } from "react-router-dom"
 import styles from './Layout.module.sass'
 import { NavbarComponent } from './NavbarComponent'
 

@@ -6,18 +6,17 @@ import { Dispatch } from 'redux'
 import { getUser } from '../api'
 import { setUser } from '../stateManager/actions/actionCreator'
 import { useTypedSelector } from '../hooks/useTypedSelector'
-import Card from 'react-bootstrap/Card'
 import { PostsList } from '../components/PostsList'
 import Spinner from 'react-bootstrap/Spinner'
+import { UserCard } from '../components/UserCard'
 
 export const User: React.FC = () => {
 
+	const [isLoading, setIsLoading] = useState(false)
 	const { id } = useParams()
 	const dispatch = useDispatch<Dispatch>()
 	const { user } = useTypedSelector(store => store.user)
 	const { posts } = useTypedSelector(store => store.post)
-	const [isLoading, setIsLoading] = useState(false)
-	
 	const userPosts = posts.filter((post) => post.userId.toString() === id)
 
 	useEffect(() => {
@@ -29,7 +28,6 @@ export const User: React.FC = () => {
 						dispatch(setUser(user))
 					}, 1000)
 				})
-				
 		}
 	}, [])
 
@@ -48,24 +46,13 @@ export const User: React.FC = () => {
 				:
 				<div>
 					<Link to={'/'}><div className={styles.backLink}>Back to posts</div></Link>
+
 					<div className={styles.title}>
 						<h1>{user.username}</h1>
 					</div>
-					<div className={styles.card}>
-						<Card style={{'width' : '50%', 'margin': '0 auto'}}>
-							<Card.Body style={{'margin' : '0 auto'}}>
-								<div className={styles.userInfo}>
-									<p><strong>Id:</strong> {user.id}</p>
-									<p><strong>Name:</strong> {user.name}</p>
-									<p><strong>Email:</strong> {user.email}</p>
-									<p><strong>Phone:</strong> {user.phone}</p>
-									<p><strong>Website:</strong> {user.website}</p>
-									<p><strong>Address:</strong> {user.address.suite.slice(5)} {user.address.street}, {user.address.city}</p>
-									<p><strong>Company:</strong> {user.company.name}</p>
-								</div>
-							</Card.Body>
-						</Card>
-					</div>
+
+					<UserCard user={user} />
+
 					<div className={styles.user_posts}>
 						<PostsList posts={userPosts} />
 					</div>
